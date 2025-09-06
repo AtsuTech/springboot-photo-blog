@@ -1,0 +1,11 @@
+services:
+  mysql:
+    container_name: 'spring-photo-blog'
+    image: 'mysql:8.0'
+    environment:
+      - 'MYSQL_DATABASE=spring_photo_blog_db'
+      - 'MYSQL_PASSWORD=develop1023'
+      - 'MYSQL_ROOT_PASSWORD=spring0123'
+      - 'MYSQL_USER=springdev'
+    ports:
+      - '3306:3306'
