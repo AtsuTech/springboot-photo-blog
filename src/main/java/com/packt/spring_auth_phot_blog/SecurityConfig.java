@@ -31,6 +31,7 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.formLogin(login -> login //  フォーム認証を使う
+        .loginPage("/login") //  自作のログインフォーム画面のを設定
         .defaultSuccessUrl("/demo/auth")//ログイン成功後の遷移先
         .permitAll()) //  フォーム認証画面は認証不要
         .authorizeHttpRequests(authz -> authz

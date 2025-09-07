@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>ログイン</title>
+</head>
+
+<body>
+  <div class="w-full">
+    <div class="w-96 mx-auto py-2">
+      <form th:action="@{/login}" method="post" class="shadow-md rounded-lg space-y-2 p-3">
+        <h3 class="text-2xl text-gray-800">ログイン</h3>
+        <br>
+        <div th:if="${param.error}">
+          <div th:if="${session.containsKey('SPRING_SECURITY_LAST_EXCEPTION')}">
+            <div class="bg-rose-600 text-white">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              <span th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
+            </div>
+          </div>
+        </div>
+        <input type="text" name="username" placeholder="ユーザー名" class="w-full p-2 border border-gray-400 rounded-md" required />
+        <input type="password" name="password" placeholder="パスワード" class="w-full p-2 border border-gray-400 rounded-md" required />
+        <button class="block w-full bg-blue-400 text-white rounded-full px-3 py-1" name="Submit" value="Login" type="Submit">ログイン</button>
+        <p></p>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>
