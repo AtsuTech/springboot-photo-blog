@@ -35,7 +35,7 @@ public class SecurityConfig {
         .defaultSuccessUrl("/demo/auth")//ログイン成功後の遷移先
         .permitAll()) //  フォーム認証画面は認証不要
         .authorizeHttpRequests(authz -> authz
-            .requestMatchers("/demo/welcome","/user/register","/user/add","demo/all").permitAll() //  トップページは認証不要
+            .requestMatchers("/demo/welcome","/user/register","/user/add","demo/all","/demo/all/posts").permitAll() //  トップページは認証不要
             .anyRequest().authenticated() //  他のURLはログイン後アクセス可能
         );
 

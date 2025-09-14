@@ -13,7 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity // This tells Hibernate to make a table out of this class
-public class User implements UserDetails {
+public class CustomUser implements UserDetails {
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
   private Integer id;
@@ -91,9 +91,9 @@ public class User implements UserDetails {
 	}
 
   //UsrDeatimigrateカスタム
-  // public void setAuthorities(Collection<? extends GrantedAuthority> authorities){
-  //   this.authorities = authorities;
-  // }
+//   public void setAuthorities(Collection<? extends GrantedAuthority> authorities){
+//     this.authorities = authorities;
+//   }
 
   //UsrDeatimigrateカスタム
   @Override

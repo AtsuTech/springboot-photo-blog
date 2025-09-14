@@ -61,17 +61,18 @@ public class UserController {
 	}
 
 	//ユーザー追加処理
-	@PostMapping(path="/user/add")
+	@PostMapping(path="/user/add*")
 	public String addNewUser (@ModelAttribute User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
 
         user.setPassword(encoder.encode(user.getPassword()));
+        user.setRole("USER");
 		userRepository.save(user);
 		return "redirect:/users"; // Redirect to the page that lists all users
 	}
 
 	//ユーザー追加フォーム画面表示
-	@GetMapping("/user/register")
+	@GetMapping("/user/register*")
 	public String add(Model model) {
 		model.addAttribute("user", new User());
 		return "auth/register";
