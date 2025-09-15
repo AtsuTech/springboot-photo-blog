@@ -20,6 +20,10 @@
             <tr th:each="post : ${posts}" class="align-middle">
                 <th width="50" th:text="${post.id}"></th>
                 <th width="50" th:text="${post.title}"></th>
+                <th width="50" th:text="${post.image}"></th>
+                <th width="50">
+                    <img width="70" th:src="${post.image}">
+                </th>
                 <th width="50" th:text="${post.user != null ? post.user.username : 'ユーザーなし'}"></th>
                 <th>
                     <p>準備中</p>

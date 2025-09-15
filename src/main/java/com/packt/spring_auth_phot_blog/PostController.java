@@ -16,10 +16,24 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;//Auth だめ？
 import org.springframework.security.core.userdetails.UserDetails;
 
+import org.springframework.web.bind.annotation.RequestParam;//file upload
+import org.springframework.web.multipart.MultipartFile;//file upload
+//import com.packt.spring_auth_phot_blog.storage.StorageFileNotFoundException;//file upload
+import com.packt.spring_auth_phot_blog.storage.StorageService;//file upload
 
 
 @Controller
 public class PostController {
+
+    //file uloadのためのインスタンス
+    private final StorageService storageService;
+
+
+    //file uloadのためのコンストラクタ
+	@Autowired
+	public PostController(StorageService storageService) {
+		this.storageService = storageService;
+	}
 
     @Autowired 
     private PostRepository postRepository;
@@ -36,8 +50,10 @@ public class PostController {
 
     //投稿追加処理
 	@PostMapping(path="/post/add")
-	public String addNewPost(@ModelAttribute Post post, @AuthenticationPrincipal(errorOnInvalidType=true) UserDetails user ) {
+	public String addNewPost(@ModelAttribute Post post, @RequestParam("file") MultipartFile file, @AuthenticationPrincipal(errorOnInvalidType=true) UserDetails user ) {
         post.setUser((CustomUser)user);
+        storageService.store(file);
+        post.setImage("/files/"+file.getOriginalFilename());
         postRepository.save(post);
         return "redirect:/posts"; 
 	}
