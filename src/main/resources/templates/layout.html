@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common_header(title, scripts)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script th:src="@{https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4}"></script>
+    <title>フォトブログ</title>
+    <title th:text="${title}+' | Tset App'">各ページタイトル | フォトブログ</title>
+</head>
+<body>
+    <header th:fragment="common_navbar" class="w-full bg-green-400 p-2">
+        フォトブログ
+    </header>
+
+    <footer th:fragment="common_footer" class="w-full bg-gray-400 h-96 text-center flex items-center justify-center">
+        <p class="text-white">Copyright &copy; 2025 Photo Blog</p>
+    </footer>
+</body>
+</html>

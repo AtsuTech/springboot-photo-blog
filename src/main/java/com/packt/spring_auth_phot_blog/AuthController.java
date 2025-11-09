@@ -3,19 +3,9 @@ package com.packt.spring_auth_phot_blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-//import java.util.Optional;
-
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.ModelAttribute;
-//import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -36,7 +26,7 @@ public class AuthController {
         user.setPassword(encoder.encode(user.getPassword()));
         user.setRole("USER");
 		userRepository.save(user);
-		return "redirect:/users"; // Redirect to the page that lists all users
+		return "redirect:/posts"; // Redirect to the page that lists all users
 	}
 
 	//ユーザー追加フォーム画面表示

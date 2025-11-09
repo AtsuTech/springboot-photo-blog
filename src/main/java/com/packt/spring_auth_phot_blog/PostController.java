@@ -4,21 +4,19 @@ package com.packt.spring_auth_phot_blog;
 //import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-// import org.springframework.web.bind.annotation.PathVariable;
-// import org.springframework.web.bind.annotation.RequestParam;
-
-
-import org.springframework.security.core.annotation.AuthenticationPrincipal;//Auth だめ？
-import org.springframework.security.core.userdetails.UserDetails;
-
-import org.springframework.web.bind.annotation.RequestParam;//file upload
+import org.springframework.web.bind.annotation.GetMapping;//Auth だめ？
+import org.springframework.web.bind.annotation.ModelAttribute;//URLパスの一部を変数として扱うためのアノテーション
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;//処理後のメッセージ表示
+import org.springframework.web.bind.annotation.RequestParam;//投稿が存在しない場合のエラー処理(例外発生)
 import org.springframework.web.multipart.MultipartFile;//file upload
-//import com.packt.spring_auth_phot_blog.storage.StorageFileNotFoundException;//file upload
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;//file upload
+
 import com.packt.spring_auth_phot_blog.storage.StorageService;//file upload
 
 
@@ -63,6 +61,22 @@ public class PostController {
 	public String add(Model model) {
 		model.addAttribute("post", new Post());
 		return "post/add";
+	}
+
+
+	//投稿削除
+	@GetMapping(path="/post/delete/{id}")
+	public String delete(@PathVariable("id") Integer id, Model model,RedirectAttributes redirectAttrs){
+		
+		try {
+			postRepository.deleteById(id);
+			redirectAttrs.addFlashAttribute("successMessage", "投稿が正常に削除されました。");
+		} catch (EmptyResultDataAccessException e) {
+			redirectAttrs.addFlashAttribute("successMessage", "投稿が存在しません。");
+		} catch (Exception e) {
+			redirectAttrs.addFlashAttribute("successMessage", "投稿の削除に失敗しました。");
+		}
+		return "redirect:/posts"; 
 	}
     
 }
