@@ -103,3 +103,9 @@ https://spring.pleiades.io/spring-security/reference/api/java/org/springframewor
 
 ## UserDeatlを拡張してUserを作る感じにする？？
 https://www.docswell.com/s/MasatoshiTada/KGVY9K-spring-security-intro#p38
+
+
+
+
+#　共通レイアウト
+https://qiita.com/TeruhisaShibuya/items/aa4de95710fa88985237
