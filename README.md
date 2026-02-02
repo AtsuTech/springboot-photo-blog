@@ -4,6 +4,19 @@
 ```
 
 
+http://localhost:8080/
+
+
+## TailwindCSS
+cliで導入
+https://tailwindcss.com/docs/installation/tailwind-cli
+
+```
+npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch
+↓Springの構成に合わせてTalwindcssのファイルのパスを下記のように変更
+npx @tailwindcss/cli -i ./src/main/resources/static/input.css -o ./src/main/resources/static/output.css --watch
+```
+
 # Security パスワード
 ```
 username: user
