@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;//file upload
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;//file upload
 
 import com.packt.spring_auth_phot_blog.storage.StorageService;//file upload
-
+import java.util.Optional;//値が空であるかもしれないことを宣言
 
 @Controller
 public class PostController {
@@ -61,6 +61,34 @@ public class PostController {
 	public String add(Model model) {
 		model.addAttribute("post", new Post());
 		return "post/add";
+	}
+
+
+	//投稿編集フォーム画面表示
+	@GetMapping("/post/update-form/{id}")
+	public String update(@PathVariable("id") Integer id, Model model){
+
+		//Optionalは値がnullかもしれないことを宣言
+		Optional<Post> post = postRepository.findById(id);
+
+		if(post.isPresent()){
+			model.addAttribute("post", post.get());
+			return "post/update";
+		}
+		//
+		return "redirect:/posts";
+	}
+
+
+	//投稿更新処理
+	@PostMapping(path="/post/update")
+	public String updateUser(@ModelAttribute Post post) {
+		//ファイルの処理が必要なので検討中
+		// storageService.store(file);
+        // post.setImage("/files/"+file.getOriginalFilename());
+
+		postRepository.save(post); // saveメソッドは、Idが存在すれば更新、なければ新規作成する
+		return "redirect:/posts";
 	}
 
 

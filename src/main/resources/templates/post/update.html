@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head th:replace="~{layout :: common_header('投稿一覧', ~{::scripts})}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% comment %} 共通のscript {% endcomment %}
+    <th:block th:fragment="scripts">
+        {% comment %} 個別のスクリプトscriptを追加する場合には {% endcomment %}
+    </th:block>
+
+</head>
+<body>
+    <header th:replace="~{layout :: common_navbar}"></header>
+    <h1>更新</h1>
+
+    <form action="#" th:action="@{/post/update}" th:object="${post}" enctype="multipart/form-data" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div>
+            <div>タイトル</div>
+            <input type="text" th:field="*{title}" />
+        </div>
+
+        <div>
+            <div>画像</div>
+            <input type="file" name="file" />
+        </div>
+
+        <div>
+            <div>本文</div>
+            <textarea name="" id="" th:field="*{body}"></textarea>
+        </div>
+
+        <p><button type="submit" class="btn btn-primary">追加</button> <input type="reset" value="Reset" /></p>
+    </form>
+    <footer th:replace="~{layout :: common_footer}"></footer>   
+</body>
+</html>

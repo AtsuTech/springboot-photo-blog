@@ -38,6 +38,7 @@
                 <th width="50" th:text="${post.user != null ? post.user.username : 'ユーザーなし'}"></th>
                 <th>
                     <a th:href="@{/post/delete/{id}(id=${post.id})}" onclick="return confirm('本当に削除しますか？');" class="bg-rose-500 text-white rounded-md">削除</a>
+                    <a th:href="@{/post/update-form/{id}(id=${post.id})}" class="bg-blue-500 text-white rounded-md">編集</a>
                 </th>
             </tr>
         </tbody>
