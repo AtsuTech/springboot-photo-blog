@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head th:replace="~{layout :: common_header('投稿一覧', ~{::scripts})}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% comment %} 共通のscript {% endcomment %}
+    <th:block th:fragment="scripts">
+        {% comment %} 個別のスクリプトscriptを追加する場合には {% endcomment %}
+    </th:block>
+
+</head>
+<body>
+    <header th:replace="~{layout :: common_navbar}"></header>
+
+    <main class="w-[950px]">
+        <h1 class="text-[20px]">
+            <span>詳細:</span>
+            <span th:text="${post.title}"></span>
+        </h1>
+
+        <div>
+            <img class="w-full" th:src="${post.image}">
+            <p th:text="${post.body}"></p>
+        </div>
+    </main>
+
+    <footer th:replace="~{layout :: common_footer}"></footer>   
+</body>
+</html>

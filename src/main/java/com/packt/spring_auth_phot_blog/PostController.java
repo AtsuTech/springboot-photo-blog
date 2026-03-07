@@ -48,6 +48,19 @@ public class PostController {
 		return "post/posts";
 	}
 
+	//投稿詳細
+	@GetMapping("/post/detail/{id}")
+	public String detailPost(@PathVariable("id") Integer id, Model model){
+		Optional<Post>  post = postRepository.findById(id);
+		if(post.isPresent()){
+			model.addAttribute("post", post.get());
+
+			//詳細ページを返す
+			return "post/detail";
+		}
+		return "redirect:/posts";
+	}
+
 
     //投稿追加処理
 	@PostMapping(path="/post/add")
@@ -87,12 +100,24 @@ public class PostController {
 
 	//投稿更新処理
 	@PostMapping(path="/post/update")
-	public String updateUser(@ModelAttribute Post post) {
+	public String updateUser(@ModelAttribute Post formPost) {
 		//ファイルの処理が必要なので検討中
 		// storageService.store(file);
         // post.setImage("/files/"+file.getOriginalFilename());
 
-		postRepository.save(post); // saveメソッドは、Idが存在すれば更新、なければ新規作成する
+		Optional<Post> optionalPost = postRepository.findById(formPost.getId());
+		if(optionalPost.isPresent()){
+			Post post = optionalPost.get();
+
+			// 更新したいカラムだけ変更
+			post.setTitle(formPost.getTitle());
+			post.setBody(formPost.getBody());
+
+			postRepository.save(post);
+		}
+
+
+		//postRepository.save(post); // saveメソッドは、Idが存在すれば更新、なければ新規作成する
 		return "redirect:/posts";
 	}
 

@@ -13,36 +13,41 @@
 <body>
     <header th:replace="~{layout :: common_navbar}"></header>
 
-    <div th:if="${successMessage}">
-        <p th:text="${successMessage}"></p>
-    </div>
-    <div th:if="${errorMessage}">
-        <p th:text="${errorMessage}"></p>
-    </div>
+    <main class="w-full">
+        <div th:if="${successMessage}">
+            <p th:text="${successMessage}"></p>
+        </div>
+        <div th:if="${errorMessage}">
+            <p th:text="${errorMessage}"></p>
+        </div>
 
-    <table class="">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>タイトル</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="post : ${posts}" class="align-middle">
-                <th width="50" th:text="${post.id}"></th>
-                <th width="50" th:text="${post.title}"></th>
-                <th width="50" th:text="${post.image}"></th>
-                <th width="50">
-                    <img width="70" th:src="${post.image}">
-                </th>
-                <th width="50" th:text="${post.user != null ? post.user.username : 'ユーザーなし'}"></th>
-                <th>
-                    <a th:href="@{/post/delete/{id}(id=${post.id})}" onclick="return confirm('本当に削除しますか？');" class="bg-rose-500 text-white rounded-md">削除</a>
-                    <a th:href="@{/post/update-form/{id}(id=${post.id})}" class="bg-blue-500 text-white rounded-md">編集</a>
-                </th>
-            </tr>
-        </tbody>
-    </table>   
+        <table class="w-[950px] mx-auto">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>タイトル</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="post : ${posts}" class="align-middle">
+                    <th width="50" th:text="${post.id}"></th>
+                    <th width="50" th:text="${post.title}"></th>
+                    <th width="50" th:text="${post.image}"></th>
+                    <th width="50">
+                        <img width="70" th:src="${post.image}">
+                    </th>
+                    <th width="50" th:text="${post.user != null ? post.user.username : 'ユーザーなし'}"></th>
+                    <th>
+                        <a th:href="@{/post/delete/{id}(id=${post.id})}" onclick="return confirm('本当に削除しますか？');" class="p-2 bg-rose-500 text-white rounded-md">削除</a>
+                        <a th:href="@{/post/update-form/{id}(id=${post.id})}" class="p-2 bg-blue-500 text-white rounded-md">編集</a>
+                        <a th:href="@{/post/detail/{id}(id=${post.id})}" class="p-2 bg-green-500 text-white rounded-md">詳細</a>
+                    </th>
+                </tr>
+            </tbody>
+        </table>           
+    </main>
+
+
     <footer th:replace="~{layout :: common_footer}"></footer>    
 </body>
 </html>
