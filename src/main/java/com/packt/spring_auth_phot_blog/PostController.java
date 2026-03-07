@@ -35,7 +35,10 @@ public class PostController {
 
     @Autowired 
     private PostRepository postRepository;
-    //private UserRepository userRepository;
+
+	//ユーザーをDBから取得する場合に使用
+	// @Autowired
+    // private CustomUserRepository userRepository;
 
     //投稿一覧
     @GetMapping("/posts")
@@ -49,6 +52,8 @@ public class PostController {
     //投稿追加処理
 	@PostMapping(path="/post/add")
 	public String addNewPost(@ModelAttribute Post post, @RequestParam("file") MultipartFile file, @AuthenticationPrincipal(errorOnInvalidType=true) UserDetails user ) {
+		// CustomUser dbUser = userRepository.findByUsername(user.getUsername()).orElseThrow(() -> new RuntimeException("User not found in DB"));
+		// post.setUser(dbUser);
         post.setUser((CustomUser)user);
         storageService.store(file);
         post.setImage("/files/"+file.getOriginalFilename());
