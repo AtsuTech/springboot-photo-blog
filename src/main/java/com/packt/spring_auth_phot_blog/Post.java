@@ -8,6 +8,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;//use for relation User
 //import jakarta.persistence.OneToOne;//use for relation User
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
+import java.util.List;
 
 @Entity
 public class Post {
@@ -68,6 +71,15 @@ public class Post {
     }
     public void setUser(CustomUser user){
         this.user = user;
+    }
+
+    @OneToMany(mappedBy ="post", cascade = CascadeType.ALL)
+	private List<Comment> comments;
+    public List<Comment> getComments(){
+        return comments;
+    }
+    public void setComments(List<Comment> comments){
+        this.comments = comments;
     }
 
 }

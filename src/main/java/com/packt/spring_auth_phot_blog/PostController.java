@@ -50,7 +50,8 @@ public class PostController {
 
 	//投稿詳細
 	@GetMapping("/post/detail/{id}")
-	public String detailPost(@PathVariable("id") Integer id, Model model){
+	//コメントの送信フォームも表示するためComment commentが必要
+	public String detailPost(@PathVariable("id") Integer id, Model model,@ModelAttribute Comment comment){
 		Optional<Post>  post = postRepository.findById(id);
 		if(post.isPresent()){
 			model.addAttribute("post", post.get());

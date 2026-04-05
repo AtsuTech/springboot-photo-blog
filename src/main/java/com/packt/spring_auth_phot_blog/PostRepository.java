@@ -1,6 +1,6 @@
 package com.packt.spring_auth_phot_blog;
 
-//import java.util.Optional;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -10,4 +10,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PostRepository extends CrudRepository<Post, Integer> {
     //Optional<Post> findByUsername(String username);
+    Optional<Post> findById(Integer id);
 }

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {% comment %} 共通のscript {% endcomment %}
+    <!-- 共通のscript -->
     <th:block th:fragment="scripts">
-        {% comment %} 個別のスクリプトscriptを追加する場合には {% endcomment %}
+        <!-- 個別のスクリプトを追加する場合 -->
     </th:block>
 
 </head>
@@ -23,6 +23,32 @@
             <img class="w-full" th:src="${post.image}">
             <p th:text="${post.body}"></p>
         </div>
+
+        <section class="bg-gray-200 rounded-md p-2 my-2">
+            <h3 class="border-b-2 border-gray-800">コメント</h3>
+            <!-- <tr th:each="comment : ${post.comments}" class="align-middle">
+                <th width="50" th:text="${comment.message}"></th>
+                <th width="50" th:text="${comment.user.username}"></th>
+            </tr>       -->
+            
+            <div th:each="comment : ${post.comments}" class="align-middle">
+                <div class="flex">
+                    <p th:text="${comment.message}"></p>
+                    <p th:text="${comment.user.username}"></p>
+                </div>
+            </div>
+        </section>
+
+
+
+        <form action="#" th:action="@{/comment/add(postId=${post.id})}" th:object="${comment}" method="post">
+            <div>
+                <div>コメント</div>
+                <textarea class="border border-gray-300 rouded-full" th:field="*{message}"></textarea>
+            </div>
+            <p><button type="submit" class="btn bg-blue-400 text-white p-2 rounded-md">追加</button></p>
+        </form>
+
     </main>
 
     <footer th:replace="~{layout :: common_footer}"></footer>   
